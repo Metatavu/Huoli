@@ -17,7 +17,7 @@ exports.create = function(req, res) {
   var role = req.body.role;
   userDAO.create(email, password, role, function(user){
     resetTokenDAO.create(user._id, function(resetToken){
-      var resetUrl = 'http://'+req.headers.host+SERVER_ROOT+'/resetpassword/'+encodeURIComponent(resetToken.token);
+      var resetUrl = 'https://'+req.headers.host+SERVER_ROOT+'/resetpassword/'+encodeURIComponent(resetToken.token);
       mailer.sendMail(email, 'Huoli - käyttäjätili', 'Sinulle on luotu käyttäjätili Huoli - sovellukseen. Käy aktivoimassa tilisi osoitteessa: ' +
           resetUrl + ' Tämä kutsu vanhenee 48 tunnin kuluttua.');
       res.redirect(SERVER_ROOT+'/user/manage');
@@ -60,8 +60,8 @@ exports.forgotpassword = function(req, res) {
   userDAO.findByEmail(email, function(user){
     if(typeof(user) !== 'undefined'){
       resetTokenDAO.create(user._id, function(resetToken){
-        var resetUrl = 'http://'+req.headers.host+SERVER_ROOT+'/resetpassword/'+encodeURIComponent(resetToken.token);
-        mailer.sendMail(email, 'Salasanan palautus', 'Olet pyytänyt salasanasi palautusta palvelussa Hällä on Väliä, voit palauttaa salasanasi menemällä osoitteeseen: ' +
+        var resetUrl = 'https://'+req.headers.host+SERVER_ROOT+'/resetpassword/'+encodeURIComponent(resetToken.token);
+        mailer.sendMail(email, 'Salasanan palautus', 'Olet pyytänyt salasanasi palautusta Huoli - palvelussa, voit palauttaa salasanasi menemällä osoitteeseen: ' +
             resetUrl + ' Jos et ole pyytänyt salasanan palautusta, voit jättää tämän viestin huomiotta.');
         res.send('success');
       });

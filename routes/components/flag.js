@@ -25,7 +25,7 @@ exports.create = function(req, res){
     var source_phone = req.body.source_phone;
     var source_relation = req.body.source_relation;
     flagDAO.create(target_name, target_address, target_phone, target_told, problem_category, source_anonym, source_name, source_address, source_phone, source_email, source_relation, desc, function(flag){
-      mailer.sendMail('palveluneuvo@mikkeli.fi', 'Uusi ilmoitus Minä Välitän - järjestelmässä', 'Minä Välitän järjestelmään on tullut uusi ilmoitus, käy katsomassa tarkemmat tiedot: http://open.mikkeli.fi/huoli/login');
+      mailer.sendMail('palveluneuvo@mikkeli.fi', 'Uusi ilmoitus Huoli - järjestelmässä', 'Huoli järjestelmään on tullut uusi ilmoitus, käy katsomassa tarkemmat tiedot: https://essote.huoli.fi/login');
       res.send(flag);
     });
   } catch (e) {
