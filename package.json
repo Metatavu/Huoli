@@ -1,6 +1,6 @@
 {
   "name": "huoli",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Application to pass concern about elderly person to city officials",
   "main": "app.js",
   "scripts": {
