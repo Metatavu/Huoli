@@ -3,7 +3,6 @@ var path = require('path');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var http = require('http');
-var fs = require('fs');
 
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -16,14 +15,14 @@ var app = express();
 mongoose.connect(db.getDbUrl());
 require('./config/passport')(passport);
 
-app.set('port', 3000);
+app.set('port', process.env.PORT);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 app.use(bodyParser());
 app.use(session({
-  secret : 'KBjNQ5OykVT2e23zcoSa'
+  secret : process.env.SESSION_SECRET
 }));
 app.use(passport.initialize());
 app.use(passport.session());
